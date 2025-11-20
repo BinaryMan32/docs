@@ -1,0 +1,4 @@
+mkdocs-material<10.0.0
+mkdocs-autolinks-plugin
+mkdocs-backlinks-section-plugin
+mkdocs-macros-plugin
