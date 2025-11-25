@@ -20,7 +20,7 @@ python3 -m venv .venv/ && source .venv/bin/activate && pip3 install -r requireme
 Preview:
 
 ```sh
-mkdocs serve
+mkdocs serve --livereload
 ```
 
 ## Local Preview with Docker
