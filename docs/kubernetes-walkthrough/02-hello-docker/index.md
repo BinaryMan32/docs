@@ -196,7 +196,20 @@ There are likely other network interfaces in the output, but we can see:
 - `docker0` - a virtual network interface managed by docker.
   Each container will have a different IP address on this network.
 
-Here's the situation that we're in:
+In the last tutorial when this worked, all we had was:
+
+```mermaid
+flowchart LR
+subgraph Host
+    direction LR
+    browser[Browser] --> host_lo_intf["Interface <b>lo</b><br>127.0.0.1/8"]
+    host_lo_intf --> host_hello_node["node/index.js<br>listening 127.0.0.1:3000"]
+end
+classDef interface fill:#00ff911a,stroke:#00ff91
+class host_lo_intf interface
+```
+
+Here's the situation that we're in now with the container:
 
 ```mermaid
 flowchart LR
