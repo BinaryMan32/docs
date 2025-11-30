@@ -200,10 +200,9 @@ Here's the situation that we're in:
 
 ```mermaid
 flowchart LR
-browser[Browser] --> host_lo_intf
 subgraph Host
     direction TB
-    host_lo_intf["Interface <b>lo</b><br>127.0.0.1/8"]
+    browser[Browser] --> host_lo_intf["Interface <b>lo</b><br>127.0.0.1/8"]
     host_lo_intf --> host_docker_publish["docker publish<br>listening 127.0.0.1:3001"]
     host_docker_publish --> host_docker_intf["Interface <b>docker0</b><br>172.17.0.1/16"]
 end
@@ -229,10 +228,9 @@ Fortunately, there's a standard way to listen on all interfaces, the special add
 
 ```mermaid
 flowchart LR
-browser[Browser] --> host_lo_intf
 subgraph Host
     direction TB
-    host_lo_intf["Interface <b>lo</b><br>127.0.0.1/8"]
+    browser[Browser] --> host_lo_intf["Interface <b>lo</b><br>127.0.0.1/8"]
     host_lo_intf --> host_docker_publish["docker publish<br>listening 127.0.0.1:3001"]
     host_docker_publish --> host_docker_intf["Interface <b>docker0</b><br>172.17.0.1/16"]
 end
