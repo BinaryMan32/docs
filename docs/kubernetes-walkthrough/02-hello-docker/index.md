@@ -31,7 +31,7 @@ Create a new file `Dockerfile` in the same directory as `index.js` and paste the
 Run the command below in order to build a container image:
 
 ```sh
-docker build --tag hello-node .
+docker build --tag hello-node:1.0.0 .
 ```
 
 To see the image we created, run:
@@ -44,7 +44,7 @@ The image shows up in the output:
 
 ```text { .no-copy }
 IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
-hello-node:latest   69436a1c833d        162MB             0B        
+hello-node:1.0.0    69436a1c833d        162MB             0B        
 ```
 
 ## Run the Container
@@ -52,7 +52,7 @@ hello-node:latest   69436a1c833d        162MB             0B
 Use docker to run a container with the image we built above:
 
 ```sh
-docker run --rm hello-node
+docker run --rm hello-node:1.0.0
 ```
 
 !!! abstract "Documentation for `docker run --rm`"
@@ -83,7 +83,7 @@ But did it really exit?
 Let's use a `docker` command to view running containers:
 
 ```sh
-docker ps --filter ancestor=hello-node
+docker ps --filter ancestor=hello-node:1.0.0
 ```
 
 !!! note "`docker ps --filter`"
@@ -95,8 +95,8 @@ docker ps --filter ancestor=hello-node
 Even though it printed `forcefully exiting`, we see our container with the `hello-node` is still running:
 
 ```text { title=Output .no-copy }
-CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS          PORTS      NAMES
-2e5e9c9c4253   hello-node   "docker-entrypoint.s…"   18 seconds ago   Up 17 seconds   3000/tcp   friendly_murdock
+CONTAINER ID   IMAGE              COMMAND                  CREATED              STATUS              PORTS      NAMES
+a8ad83388f40   hello-node:1.0.0   "docker-entrypoint.s…"   About a minute ago   Up About a minute   3000/tcp   nervous_khayyam
 ```
 
 To stop the container, run the command below, replacing `NAME_OR_ID` with either the `CONTAINER ID` or `NAMES` of the container.
@@ -108,7 +108,7 @@ docker kill NAME_OR_ID
 We don't want to kill the container manually every time we run it, so let's make a small change to how we run it:
 
 ```sh
-docker run --rm --init hello-node
+docker run --rm --init hello-node:1.0.0
 ```
 
 !!! abstract "Documentation for `docker run --init`"
@@ -125,7 +125,7 @@ Fortunately, docker is able to "publish" container ports by forwarding from a po
 To make sure we're communicating with our app running in a container instead of the previous tutorial version, we'll forward a different host port (`3001`) to container port `3000`.
 
 ```sh
-docker run --rm --init --publish 3001:3000 hello-node
+docker run --rm --init --publish 3001:3000 hello-node:1.0.0
 ```
 
 If we open <http://127.0.0.1:3001/> in the browser, we still don't see "Hello World", but we do get a different error message:
@@ -143,7 +143,7 @@ Let's run a command in our container to learn more about its network setup.
 First, use `docker ps` to get the container's `NAMES`:
 
 ```sh
-docker ps --filter ancestor=hello-node
+docker ps --filter ancestor=hello-node:1.0.0
 ```
 
 Now, use `docker exec` to run a command inside the container, replacing `NAME_OR_ID` with either the `CONTAINER ID` or `NAMES` of the container.
@@ -264,9 +264,10 @@ Let's update `index.js` to use this address.
 ```
 
 Rebuild the image and start the container again.
+We'll use version `1.0.1` now since we've fixed a bug in the image.
 
 ```sh
-docker build --tag hello-node . && docker run --rm --init --publish 3001:3000 hello-node
+docker build --tag hello-node:1.0.1 . && docker run --rm --init --publish 3001:3000 hello-node:1.0.1
 ```
 
 On startup, we see the new address `0.0.0.0`.
