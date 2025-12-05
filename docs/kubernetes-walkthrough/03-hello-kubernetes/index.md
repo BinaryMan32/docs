@@ -80,7 +80,9 @@ Create a new file `hello-node-pod.yaml` and paste the following.
    In this tutorial, it's only used in `kubectl` commands.
 2. A `pod` can have more than one container, but we only need one in this tutorial.
 3. See [Hello Docker](../02-hello-docker/index.md)
-4. Don't try to pull the image from a public registry, it doesn't exist there since we built it locally.
+4. Setting `#!yaml imagePullPolicy: Never` is an unusual thing to do.
+   We're only using it because we built our app's image locally.
+   We know the image doesn't exist in a public registry, so we don't want to try to pull it from [Docker Hub](https://hub.docker.com/).
 5. See the line `#!js const port = 3000;` from [Hello World Wide Web - Add Source](../01-hello-world-wide-web/index.md#add-source)
 
 ### Apply Pod Definition
