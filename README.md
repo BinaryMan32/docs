@@ -37,3 +37,13 @@ Use `pre-commit` to find broken links before committing.
 sudo apt install pre-commit
 pre-commit install
 ```
+
+## Browser Screenshots
+
+In Chrome, open a new guest profile window.
+
+Run the following command to resize to `874x576`.
+
+```sh
+wmctrl -r :SELECT: -e 0,32,32,874,576
+```
