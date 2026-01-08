@@ -7,7 +7,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        ".gitlab-ci.yml",
+        "docs.yaml",
         "build.sh",
         "preview.sh"
       ],
