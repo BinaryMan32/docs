@@ -2,36 +2,31 @@
 
 Published at <https://binaryman32.github.io/docs>
 
-Documentation is built as a static site using [mkdocs][] and the [material][mkdocs-material] theme.
-If you want to do something that it doesn't support, check the [mkdocs catalog][mkdocs-catalog] for plugins.
+Documentation is built as a static site using [zensical][].
+The [zensical docker image][zensical-docker] is used by the `preview.sh` and `build.sh` scripts.
 
-[mkdocs]: https://www.mkdocs.org/
-[mkdocs-material]: https://squidfunk.github.io/mkdocs-material
-[mkdocs-catalog]: https://github.com/mkdocs/catalog
+[zensical]: https://zensical.org/
+[zensical-docker]: https://hub.docker.com/r/zensical/zensical
 
-## Local Preview with Virtualenv
+## Initial Project Setup
 
-Create virtualenv:
+This doesn't need to be run again after you clone this project, and is provided only for reference.
 
 ```sh
-python3 -m venv .venv/ && source .venv/bin/activate && pip3 install -r requirements.txt
+docker run --rm --user ${UID}:${GID} -v ${PWD}:/docs zensical/zensical:0.0.15 new
 ```
 
-Preview:
+## Local Preview
+
+The command below will start zensical in docker and open the local preview in a browser.
 
 ```sh
-mkdocs serve --livereload
-```
-
-## Local Preview with Docker
-
-```sh
-./preview-docker.sh
+./preview.sh
 ```
 
 ## Pre-commit
 
-Use `pre-commit` to find broken links before committing.
+Use `pre-commit` to detect build issues when committing.
 
 ```sh
 sudo apt install pre-commit

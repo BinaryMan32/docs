@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        ".gitlab-ci.yml",
+        "build.sh",
+        "preview.sh"
+      ],
+      "matchStrings": [
+        "ZENSICAL_VERSION[:=]\\s*\"(?<currentValue>\\S+)\""
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "zensical/zensical"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Automerge all patch updates",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true
+    }
+  ]
+}

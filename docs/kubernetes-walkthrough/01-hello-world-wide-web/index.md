@@ -35,7 +35,7 @@ Code taken from [An Example Node.js Application](https://nodejs.org/en/learn/get
 pnpx node index.js
 ```
 
-``` {: title=Output .no-copy }
+```text { title=Output .no-copy }
 Server running at http://127.0.0.1:3000/
 ```
 

@@ -6,8 +6,8 @@ repos:
       - id: trailing-whitespace
   - repo: local
     hooks:
-      - id: check-mkdocs-build
-        name: check-mkdocs-build
-        entry: check-docker.sh
+      - id: check-zensical-build
+        name: check-zensical-build
+        entry: build.sh
         language: script
         pass_filenames: false
