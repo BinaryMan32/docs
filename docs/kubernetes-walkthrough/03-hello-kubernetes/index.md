@@ -129,7 +129,7 @@ LAST SEEN              TYPE      REASON              OBJECT               MESSAG
 
 The image `hello-node:1.0.1` is not available in the cluster.
 
-### Load image
+### Load Image
 
 Run a `kind` command to load the docker image into the kubernetes cluster registry.
 
