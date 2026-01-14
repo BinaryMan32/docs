@@ -1,6 +1,6 @@
 # Deployment
 
-This tutorial builds on [Hello Kubernetes](../03-hello-kubernetes/index.md) to create kubernetes pods using a deployment and access them using a service.
+This tutorial builds on [Hello Kubernetes](../03-hello-kubernetes/index.md) to create kubernetes pods using a deployment.
 
 ## Create Cluster
 
