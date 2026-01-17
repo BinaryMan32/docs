@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "reviewers": [
+    "fettinge@gmail.com"
+  ],
   "customManagers": [
     {
       "customType": "regex",
