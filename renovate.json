@@ -3,9 +3,8 @@
   "extends": [
     "config:recommended"
   ],
-  "reviewers": [
-    "fettinge@gmail.com"
-  ],
+  "assigneesFromCodeOwners": true,
+  "reviewersFromCodeOwners": true,
   "customManagers": [
     {
       "customType": "regex",
