@@ -15,7 +15,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     env:
       # ZENSICAL_VERSION is managed by a renovate customManager regex
-      ZENSICAL_VERSION: "0.0.19"
+      ZENSICAL_VERSION: "0.0.20"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/configure-pages@v5
