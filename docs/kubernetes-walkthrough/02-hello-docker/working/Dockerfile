@@ -1,5 +1,5 @@
 # Use a base image with node.js (1)
-FROM node:25.5.0-alpine3.22
+FROM node:25.6.0-alpine3.22
 
 # Default working directory is / (root), use a subdirectory for our app
 WORKDIR /app
