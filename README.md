@@ -35,10 +35,14 @@ pre-commit install
 
 ## Browser Screenshots
 
-In Chrome, open a new guest profile window.
-
-Run the following command to resize to `874x576`.
+Run the following command to open a new chrome window with a consistent size
 
 ```sh
-wmctrl -r :SELECT: -e 0,32,32,874,576
+./browser-for-screenshot.sh
+```
+
+The script passes additional arguments to chrome, so you can also specify a URL
+
+```sh
+./browser-for-screenshot.sh http://127.0.0.1:8000/
 ```
