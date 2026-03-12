@@ -18,10 +18,10 @@ sudo mv ./kind /usr/local/bin/kind
 
 ### Create Cluster
 
-Create a `kind` cluster named `tutorial` with kubernetes version `1.34.0`.
+Create a `kind` cluster named `tutorial` with kubernetes version `1.35.1`.
 
 ```sh
-kind create cluster --name tutorial --image kindest/node:v1.34.0
+kind create cluster --name tutorial --image kindest/node:v1.35.1
 ```
 
 ## Connect to Cluster
