@@ -7,7 +7,7 @@ const podName = process.env.POD_NAME || 'unknown'; //(1)!
 const server = createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end(`Hello World from pod ${podName}`); //(2)!
+  res.end(`Hello World from pod ${podName}\n`); //(2)!
 });
 
 server.listen(port, hostname, () => {

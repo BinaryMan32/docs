@@ -54,7 +54,7 @@ Create the file `hello-node-service-clusterip.yaml` and paste the contents below
 6. The service will send requests to the `#!yaml targetPort:` on selected `Pod`s.
    The `Service`'s `#!yaml targetPort:` should match the `Pod`'s `#!yaml containerPort:`.
 
-### Apply ClusterIP Service Definitions
+### Apply ClusterIP Service
 
 Apply the service definition to create the service in the cluster.
 
@@ -99,3 +99,94 @@ Unfortunately, `kubectl port-forward` doesn't really send requests to the `Servi
 `Deployment`'s first pod.
 
 Press ++ctrl+c++ in your terminal to stop the `kubectl port-forward`.
+
+## NodePort Service Type
+
+A `NodePort` service exposes a high humbered port (`30000`-`32767`) on all nodes.
+This will finally allow us to access the `Service`/`Deployment` without using `kubectl port-forward`.
+
+### NodePort Service Definition
+
+Create the file `hello-node-service-nodeport.yaml` and paste the contents below.
+
+```yaml { title=hello-node-service-nodeport.yaml hl_lines="4 10 14" }
+--8<-- "docs/kubernetes-walkthrough/05-service/hello-node-service-nodeport.yaml"
+```
+
+1. This `#!yaml Service` uses a different name, so we can deploy it without removing the `#!yaml hello-node-clusterip` service.
+2. Note the `#!yaml type:` has changed relative to the previous service.
+3. If `#!yaml nodePort:` is not specified, one will be assigned automatically.
+   Setting the port ourselves makes it easier to follow examples.
+
+### Apply NodePort Service
+
+Apply the service definition to create the service in the cluster.
+
+```sh
+kubectl apply -f hello-node-service-nodeport.yaml
+```
+
+```text { title=Output .no-copy }
+service/hello-node-nodeport created
+```
+
+### Get NodePort Service
+
+```sh
+kubectl get service hello-node-nodeport
+```
+
+```text { title=Output .no-copy }
+NAME                  TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+hello-node-nodeport   NodePort   10.96.196.195   <none>        80:30001/TCP   43s
+```
+
+### Test NodePort Service
+
+First, we need to find the address of the kind kubernetes node, so that we can connect to it from the browser.
+
+```sh
+NODE_ADDRESS=$(kubectl get nodes --output=jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}')
+```
+
+!!! tip
+
+    The `jsonpath` expression is a bit complicated.
+    If you wanted to write a similar expression, you can save the
+    JSON output to a file to inspect its structure.
+
+    ```sh
+    kubectl get nodes --output=json > nodes.json
+    ```
+
+If you'd like to see the node address, you can run:
+
+```sh
+echo $NODE_ADDRESS
+```
+
+Instead of opening the address in a browser, we're going to send `10` requests quickly using `curl`.
+We'll use the `NODE_ADDRESS` environment variable set above, along with the port `:30001` specified by `#!yaml nodePort:` in the [NodePort Service Definition](#nodeport-service-definition).
+
+```sh
+for x in {1..10}; do curl -s $NODE_ADDRESS:30001; done
+```
+
+This should give you output similar to the below.
+Note that we can see all 3 pods handle the request.
+
+```
+Hello World from pod hello-node-7944c56f54-qsw47
+Hello World from pod hello-node-7944c56f54-bxgk7
+Hello World from pod hello-node-7944c56f54-qsw47
+Hello World from pod hello-node-7944c56f54-qsw47
+Hello World from pod hello-node-7944c56f54-bxgk7
+Hello World from pod hello-node-7944c56f54-vskkf
+Hello World from pod hello-node-7944c56f54-qsw47
+Hello World from pod hello-node-7944c56f54-vskkf
+Hello World from pod hello-node-7944c56f54-qsw47
+Hello World from pod hello-node-7944c56f54-vskkf
+```
+
+We're one step closer to connecting to our application in a nice way.
+However, this still isn't a very good experience since we're not able to use the standard `http://` port `80`.

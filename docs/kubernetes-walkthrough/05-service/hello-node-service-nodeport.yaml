@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-node-nodeport #(1)!
+  labels:
+    app: hello-node
+spec:
+  selector:
+    app: hello-node
+  type: NodePort #(2)!
+  ports:
+    - port: 80
+      targetPort: 3000
+      nodePort: 30001 #(3)!
