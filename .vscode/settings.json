@@ -2,5 +2,8 @@
   "editor.tabSize": 4,
   "markdownlint.config": {
     "MD007": { "indent": 4 }
+  },
+  "files.associations": {
+    "*.md": "python-markdown"
   }
 }
