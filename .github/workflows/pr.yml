@@ -1,0 +1,19 @@
+# build the docs without deploying, so PRs (e.g. renovate updates) get a status check
+name: Documentation PR
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    env:
+      # ZENSICAL_VERSION is managed by a renovate customManager regex
+      ZENSICAL_VERSION: "0.0.73"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.x
+      - run: pip install zensical==$ZENSICAL_VERSION
+      - run: zensical build --clean

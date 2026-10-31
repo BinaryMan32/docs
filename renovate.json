@@ -9,7 +9,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        ".github/workflows/docs.yml",
+        ".github/workflows/*.yml",
         "build.sh",
         "preview.sh"
       ],
