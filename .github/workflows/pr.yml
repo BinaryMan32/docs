@@ -8,7 +8,7 @@ jobs:
   build:
     env:
       # ZENSICAL_VERSION is managed by a renovate customManager regex
-      ZENSICAL_VERSION: "0.0.73"
+      ZENSICAL_VERSION: "0.0.74"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
